@@ -16,6 +16,7 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
+from urllib.parse import urlparse
 
 '''
 #Input
@@ -33,8 +34,13 @@ elif("1" == target):
 '''
 
 istc_id = 'whchanbi@connect.ust.hk'
-target = "Dry Machine"
 password ='Hkust61387159'
+print('What are you looking for(0: Washing machine, 1: Dryer): ', end='')
+target = input()
+if("0" == target):
+    target = "Washing Machine"
+elif("1" == target):
+    target = "Dry Machine"
 
 def sendEmail(code_path):
     #Changable Variables
@@ -78,7 +84,29 @@ driver.find_element(By.ID, "idSIButton9").click()
 time.sleep(1.5)
 driver.find_element(By.NAME, 'passwd').send_keys(password)
 driver.find_element(By.ID, "idSIButton9").click()
-time.sleep(5)
+time.sleep(7)
+
+#Duo
+while(True):
+    domain = urlparse(driver.current_url).netloc
+    if domain == 'api-84f626fe.duosecurity.com':
+        #Check expired
+        print("Waiting for DUO")
+        time.sleep(1)
+        if len(driver.find_elements(By.ID, 'error-view-header-text')) != 0:
+            print('Expired')
+            driver.refresh()
+        elif len(driver.find_elements(By.ID, 'trust-browser-button')) != 0:
+            print("trust")
+            driver.find_element(By.ID, "trust-browser-button").click()
+            break
+
+        #start over when domain still duo
+        continue
+
+    break
+print("DUO finish")
+time.sleep(10)
 
 #Get Tickets
 print('Looking for tickets')
