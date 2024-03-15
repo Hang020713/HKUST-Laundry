@@ -18,23 +18,12 @@ from email.utils import COMMASPACE, formatdate
 
 from urllib.parse import urlparse
 
-'''
 #Input
 print('ISTC ID: ', end='')
 istc_id = input()
 print('password: ', end='')
 password = input()
 #password ='Hkust61387159'
-print('What are you looking for(0: Washing machine, 1: Dryer): ', end='')
-target = input()
-if("0" == target):
-    target = "Washing Machine"
-elif("1" == target):
-    target = "Dry Machine"
-'''
-
-istc_id = 'whchanbi@connect.ust.hk'
-password ='Hkust61387159'
 print('What are you looking for(0: Washing machine, 1: Dryer): ', end='')
 target = input()
 if("0" == target):
