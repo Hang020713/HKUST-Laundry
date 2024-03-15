@@ -33,9 +33,9 @@ elif("1" == target):
 
 def sendEmail(code_path):
     #Changable Variables
-    from_email = "naths.bman@gmail.com"
+    from_email = "your email, prefer gmail"
     to_email = istc_id
-    key_email = "vxmpzwdhbcfjvmuy"
+    key_email = "your email private key"
 
     smtp = smtplib.SMTP(host="smtp.gmail.com", port="587")
     smtp.ehlo()
@@ -57,7 +57,7 @@ def sendEmail(code_path):
     image = MIMEImage(img_data, name=os.path.basename(code_path))
     content.attach(image)
     content.attach(MIMEText(
-        "By Naths"
+        "Laundry Ticket"
         , 'html'))
     smtp.send_message(content)
 
